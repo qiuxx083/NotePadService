@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.db.pojo.Notes" table="NOTES">
+		<id name="noteId" type="long">
+			<column name="NOTE_ID" />
+			<generator class="native" />
+		</id>
+		<property name="noteName" type="string">
+			<column name="NOTE_NAME" length="128" not-null="true" />
+		</property>
+		<property name="content" type="string">
+			<column name="CONTENT" />
+		</property>
+		<property name="createdTime" type="timestamp">
+			<column name="CREATED_TIME" not-null="true" />
+		</property>
+		<property name="userId" type="long">
+			<column name="USER_ID" not-null="true" />
+		</property>
+	</class>
+	<query name="readByUserName">
+       <![CDATA[select note from Notes note, User user where user.userName=:userName and user.userId=note.userId]]>
+	</query>
+	<query name="readByNoteId">
+       <![CDATA[from Notes note where note.noteId=:noteId]]>
+	</query>
+</hibernate-mapping>
