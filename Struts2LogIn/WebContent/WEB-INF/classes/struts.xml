@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+        
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+	<constant name="struts.objectFactory" value="spring" />
+	
+	<package name="default" namespace="/" extends="struts-default">
+		<global-results>
+			<result name="globalLogin">/pages/login.jsp</result>
+		</global-results>
+	
+		<action name="Welcome">
+			<result>/pages/login.jsp</result>
+		</action>
+	
+		<action name="LogInAction" class="com.struts2.Actions.LogInAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">NotesAction</param>
+				<param name="actionType">showNotes</param>
+			</result>
+			<result name="input">/pages/login.jsp</result>
+			<result name="error">/pages/login.jsp</result>
+			<result name="loginPage">/pages/login.jsp</result>
+			<result name="registerPage">/pages/register.jsp</result>
+		</action>
+		
+		<action name="RegisterAction" class="com.struts2.Actions.RegisterAction">
+			<result name="success">/pages/login.jsp</result>
+			<result name="input">/pages/register.jsp</result>
+			<result name="error"></result>
+		</action>
+		
+		<action name="NotesAction" class="com.struts2.Actions.NotesAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">NotesAction</param>
+				<param name="actionType">showNotes</param>
+			</result>
+			<result name="input">/pages/loginSuccess.jsp</result>
+			<result name="error">/pages/loginSuccess.jsp</result>
+			<result name="showNotes">/pages/loginSuccess.jsp</result>
+			<result name="viewNote">/pages/loginSuccess.jsp</result>
+		</action>
+	</package>
+</struts>
